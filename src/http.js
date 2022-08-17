@@ -2,9 +2,9 @@
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
  */
-import axios from 'axios';
-import router from './router';
-import store from './store';
+import axios from "axios";
+import router from "./router";
+import store from "./store";
 
 /**
  * 跳转登录页
@@ -12,7 +12,7 @@ import store from './store';
  */
 const toLogin = () => {
   router.replace({
-    path: '/',
+    path: "/",
     query: {
       redirect: router.currentRoute.fullPath,
     },
@@ -25,8 +25,12 @@ const instance = axios.create({
 });
 
 // 请求地址
-instance.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://49.235.94.43:4000': 'http://localhost:4000';
+// instance.defaults.baseURL =
+//   process.env.NODE_ENV === "production"
+//     ? "http://49.235.94.43:4000"
+//     : "http://localhost:4000";
 
+instance.defaults.baseURL = "http://49.235.94.43:4000";
 // // 设置post请求头
 // instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -34,22 +38,22 @@ instance.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://49.2
 instance.interceptors.request.use(
   (config) => {
     // 每次请求附加一个Ticket
-    const {ticket} = store.state;
+    const { ticket } = store.state;
     // if (ticket) {
     //     config.params.ticket = ticket;
     // }
     // ticket && (config.headers.Authorization = ticket);
     return config;
   },
-  error => Promise.error(error),
+  (error) => Promise.error(error)
 );
 
 // 响应拦截器
 instance.interceptors.response.use(
   // 请求成功
-  res => (res.status === 200 ? Promise.resolve(res) : Promise.reject(res)),
+  (res) => (res.status === 200 ? Promise.resolve(res) : Promise.reject(res)),
   // 请求失败
-  error => Promise.reject(error.response),
+  (error) => Promise.reject(error.response)
 );
 
 export default instance;

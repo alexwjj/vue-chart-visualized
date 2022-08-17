@@ -17,8 +17,8 @@ export default {
   data() {
     return {
       user: {
-        uid: localStorage.getItem('uid'),
-        username: localStorage.getItem('user'),
+        uid: localStorage.getItem("uid"),
+        username: localStorage.getItem("user"),
       },
     };
   },
@@ -27,18 +27,19 @@ export default {
       return this.$route.meta.title;
     },
   },
+  created() {},
   mounted() {
-    if (!this.user.uid) {
-      this.logout();
-    }
+    // if (!this.user.uid) {
+    //   this.logout();
+    // }
   },
   methods: {
     logout() {
-      localStorage.removeItem('uid');
-      localStorage.removeItem('user');
-      this.$router.push('/');
+      localStorage.removeItem("uid");
+      localStorage.removeItem("user");
+      this.$router.push("/");
     },
-  }
+  },
 };
 </script>
 
@@ -69,7 +70,7 @@ export default {
     height: 32px;
     background: #ccc;
     border-radius: 50%;
-    background-image: url('../../assets/img/profile.jpg');
+    background-image: url("../../assets/img/profile.jpg");
     background-size: 32px;
   }
 }

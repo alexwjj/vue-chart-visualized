@@ -16,14 +16,15 @@ export default {
   data() {
     return {
       menuList: [
+        // {
+        //   name: '数据管理',
+        //   icon: 'el-icon-menu',
+        //   path: '/console/data',
+        // },
         {
-          name: '数据管理',
-          icon: 'el-icon-menu',
-          path: '/console/data',
-        }, {
-          name: '我的可视化',
-          icon: 'el-icon-document',
-          path: '/console/chart',
+          name: "我的可视化",
+          icon: "el-icon-document",
+          path: "/console/chart",
         },
       ],
     };

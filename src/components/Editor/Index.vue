@@ -14,11 +14,11 @@
 
 <script>
 /* eslint-disable */
-import Topbar from './Topbar.vue';
-import Toolbar from './Toolbar.vue';
-import Config from './Config.vue';
-import ScaleBar from './ScaleBar.vue';
-import html2canvas from 'html2canvas';
+import Topbar from "./Topbar.vue";
+import Toolbar from "./Toolbar.vue";
+import Config from "./Config.vue";
+import ScaleBar from "./ScaleBar.vue";
+import html2canvas from "html2canvas";
 
 var interval;
 
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      title: '',
+      title: "",
       scale: 1,
       preview: false,
       chartData: {
@@ -50,7 +50,8 @@ export default {
     },
   },
   mounted() {
-    this.$http.get('/chart/' + this.$route.params.id)
+    this.$http
+      .get("/chart/" + this.$route.params.id)
       .then((res) => {
         const { errno, data } = res.data;
         if (errno === 0) {
@@ -85,11 +86,12 @@ export default {
       this.chartData.elements.splice(index, 1);
     },
     saveChartData() {
-      const screenshot = this.generateScreenShot().then(url => {
-        this.$http.put('/chart/' + this.$route.params.id, {
-          img: url,
-          chartData: this.chartData,
-        })
+      const screenshot = this.generateScreenShot().then((url) => {
+        this.$http
+          .put("/chart/" + this.$route.params.id, {
+            img: url,
+            chartData: this.chartData,
+          })
           .then((res) => {
             const { errno, data } = res.data;
             if (errno === 0) {
@@ -104,10 +106,11 @@ export default {
       });
     },
     generateData(item) {
-      if (item.data.datacon.type == 'raw') {
-        item.data.generated = item.data.datacon.data
-      } else if (item.data.datacon.type == 'connect') {
-        this.$http.get('/connect/' + item.data.datacon.connectId)
+      if (item.data.datacon.type == "raw") {
+        item.data.generated = item.data.datacon.data;
+      } else if (item.data.datacon.type == "connect") {
+        this.$http
+          .get("/connect/" + item.data.datacon.connectId)
           .then((res) => {
             const { errno, data } = res.data;
             if (errno === 0) {
@@ -116,30 +119,31 @@ export default {
             }
           })
           .catch(() => {});
-      } else if (item.data.datacon.type == 'get') {
+      } else if (item.data.datacon.type == "get") {
         clearInterval(interval);
         let time = item.data.datacon.interval ? item.data.datacon.interval : 1;
         interval = setInterval(() => {
-          this.$http.get(item.data.datacon.getUrl)
+          this.$http
+            .get(item.data.datacon.getUrl)
             .then((res) => {
               item.data.generated = res.data;
             })
             .catch(() => {});
-        }, time * 1000)
+        }, time * 1000);
       }
     },
     generateScreenShot() {
       let that = this;
       return new Promise(function(resolve, reject) {
-        let screenRef = that.$refs['screenContainer'].$refs['screen'];
+        let screenRef = that.$refs["screenContainer"].$refs["screen"];
         html2canvas(screenRef, {
-          backgroundColor: '#142E48'
+          backgroundColor: "#142E48",
         }).then((canvas) => {
           let dataURL = canvas.toDataURL("image/png");
           resolve(dataURL);
-        })
-      })
-    }
+        });
+      });
+    },
   },
 };
 </script>

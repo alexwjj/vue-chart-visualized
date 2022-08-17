@@ -7,7 +7,7 @@
         .login-box(v-if="show")
           .radio-group
             .radio-btn(:class="{active: tab == 'login'}" @click="tab = 'login'") 登录
-            .radio-btn(:class="{active: tab == 'reg'}" @click="tab = 'reg'") 注册
+            //- .radio-btn(:class="{active: tab == 'reg'}" @click="tab = 'reg'") 注册
           el-input(placeholder="请输入用户名" v-model="form.user")
           el-input(
             placeholder="请输入密码"
@@ -20,26 +20,25 @@
 
 <script>
 /* eslint-disable */
-import md5 from 'js-md5';
+import md5 from "js-md5";
 
 export default {
   data() {
     return {
       show: false,
-      tab: 'login',
+      tab: "login",
       form: {
-        user: '',
-        password: '',
+        user: "",
+        password: "",
       },
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     handleClick() {
       if (!this.show) {
-        if (localStorage.getItem('uid')) {
-          this.$router.push('console');
+        if (localStorage.getItem("uid")) {
+          this.$router.push("console");
         } else {
           this.show = true;
         }
@@ -49,18 +48,18 @@ export default {
         this.$http
           .post(`/user/${this.tab}`, {
             user: this.form.user,
-            pass: md5pass
+            pass: md5pass,
           })
           .then((res) => {
             const { errno, errmsg, data } = res.data;
             if (errno === 0) {
               this.$message({
-                type: 'success',
-                message: '验证成功'
+                type: "success",
+                message: "验证成功",
               });
-              localStorage.setItem('uid', data.uid);
-              localStorage.setItem('user', data.name);
-              this.$router.push('console');
+              localStorage.setItem("uid", data.uid);
+              localStorage.setItem("user", data.name);
+              this.$router.push("console");
             } else {
               this.$message.error(errmsg);
             }
@@ -77,7 +76,7 @@ export default {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: url('../assets/img/bg.png');
+  background: url("../assets/img/bg.png");
   background-position: 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -101,7 +100,7 @@ export default {
   text-align: center;
   font-size: 16px;
   font-weight: 300;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
   letter-spacing: 4px;
   color: #808080;
   margin: 0 0 40px;
@@ -143,17 +142,17 @@ export default {
     font-size: 14px;
     border-radius: 50px;
     &:hover {
-      background: #409EFF;
+      background: #409eff;
       cursor: pointer;
     }
   }
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
