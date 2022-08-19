@@ -90,7 +90,7 @@
 <script>
 /* eslint-disable */
 export default {
-  props: ['scale'],
+  props: ["scale"],
   data() {
     return {
       screenDraggable: false,
@@ -98,7 +98,9 @@ export default {
   },
   computed: {
     publicUrl() {
-      return `http://${window.location.host}${window.location.pathname}#/view/${this.$route.params.id}`;
+      return `http://${window.location.host}${window.location.pathname}#/view/${
+        this.$route.params.id
+      }`;
     },
     chartData() {
       return this.$parent.chartData;
@@ -119,10 +121,10 @@ export default {
   methods: {
     onCopy() {
       this.$parent.publishPopVisible = false;
-      this.$refs['input-link'].select();
-//       textarea.select();
-// // 执行复制
-document.execCommand('copy', true);
+      this.$refs["input-link"].select();
+      //       textarea.select();
+      // // 执行复制
+      document.execCommand("copy", true);
     },
     handleSpaceDown() {
       this.screenDraggable = true;
@@ -147,7 +149,7 @@ document.execCommand('copy', true);
     },
     generateData(item) {
       this.$parent.generateData(item);
-    }
+    },
   },
 };
 </script>
@@ -163,8 +165,8 @@ document.execCommand('copy', true);
 }
 
 .screen-box {
-  // width: 1220px;
-  // height: 400px;
+  width: 1220px;
+  height: 400px;
   position: relative;
   background: #ffffff;
   transform-origin: 0 0;
@@ -202,15 +204,15 @@ document.execCommand('copy', true);
       box-sizing: border-box;
       &.border1 {
         border: 50px solid transparent;
-        border-image: url('./../../assets/img/borders/1.png') 50;
+        border-image: url("./../../assets/img/borders/1.png") 50;
       }
       &.border2 {
         border: 50px solid transparent;
-        border-image: url('./../../assets/img/borders/2.png') 50;
+        border-image: url("./../../assets/img/borders/2.png") 50;
       }
       &.border3 {
         border: 50px solid transparent;
-        border-image: url('./../../assets/img/borders/3.png') 50;
+        border-image: url("./../../assets/img/borders/3.png") 50;
       }
     }
   }
